@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Carta</title>
+<link rel="icon" type="image/png" href="C:/Users/ffera/Downloads/Captura_de_pantalla_2025-12-12_012213-removebg-preview.png">
+<style>
+ /* 🎨 ESTILOS MODIFICADOS PARA EL FONDO CON DEGRADADO */
+ body {
+ font-family: 'Arial', sans-serif;
+ margin: 0;
+ padding: 0;
+ /* CÓDIGO MODIFICADO: Aplicar un degradado lineal de morado a rosa */
+ background-color: #e0b0ff; /* Fallback color */
+ background-image: linear-gradient(135deg, #a080c0 0%, #ffc0d8 100%); 
+ overflow-x: hidden;
+ }
+ .screen {
+  display: none;
+  justify-content: center;
+  align-items: center;
+  /* ELIMINADO: height: 100vh; */
+  text-align: center;
+  flex-direction: column;
+  /* AÑADIDO: Mínima altura para que ocupe al menos la pantalla completa si el contenido es corto */
+  min-height: 100vh; 
+  width: 100%;
+  padding: 20px 0; /* Un poco de padding arriba y abajo */
+ }
+ #notepadScreen {
+ display: flex;
+ }
+ .notepad {
+ background-color: #ffffff; /* Fondo blanco para simular papel */
+ /* Borde más sutil, ahora es solo parte de la sombra */
+ border: 1px solid #e0e0e0; 
+ padding: 30px; /* Más padding */
+ border-radius: 20px; /* Bordes más redondeados */
+ width: 90%;
+ max-width: 500px;
+ text-align: left;
+ font-family: 'Comic Sans MS', cursive, sans-serif;
+ line-height: 1.6;
+ /* Sombra más suave y flotante */
+ box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+ position: relative;
+ transition: box-shadow 0.3s ease;
+ }
+ .notepad:hover {
+ box-shadow: 0 15px 40px rgba(0, 0, 0, 0.15); /* Efecto al pasar el ratón */
+ }
+ .notepad h3 {
+ margin-top: 0;
+ color: #333333;
+ }
+ .notepad h4 {
+ color: #e91e63; /* Color brillante para los títulos */
+ }
+ .btn-container {
+ display: flex;
+ justify-content: space-between;
+ margin-top: 25px; /* Más espacio */
+ }
+ .btn {
+ /* Estilo de botón más limpio y moderno */
+ background-color: #ffffff;
+ border: 1px solid #ff79c6; /* Borde rosa suave */
+ color: #e91e63; /* Texto rosa */
+ padding: 10px 20px;
+ font-size: 16px;
+ border-radius: 25px; /* Botones tipo píldora */
+ cursor: pointer;
+ box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+ transition: all 0.3s ease;
+ font-weight: bold;
+ }
+ .btn:hover {
+ background-color: #ff79c6; /* Fondo al pasar el ratón */
+ color: white;
+ transform: translateY(-3px);
+ box-shadow: 0 6px 10px rgba(0,0,0,0.2);
+ }
+ /* Estilos del carrusel y de la imagen de page 2 */
+ .carousel, #page2 img {
+ box-shadow: 0 5px 15px rgba(0,0,0,0.2); /* Sombra consistente para elementos de imagen */
+ }
+ .carousel {
+ position: relative;
+ width: 90%;
+ max-width: 500px;
+ margin: 20px auto;
+ overflow: hidden;
+ border-radius: 15px;
+ }
+ .carousel-track {
+ display: flex;
+ transition: transform 0.6s ease-in-out;
+ width: 100%;
+ }
+ .carousel-track img {
+ width: 100%;
+ border-radius: 15px;
+ flex-shrink: 0;
+ object-fit: cover;
+ }
+ .carousel-btn {
+ position: absolute;
+ top: 50%;
+ transform: translateY(-50%);
+ background-color: #ff79c6; /* Color brillante para los botones del carrusel */
+ color: white;
+ border: none;
+ font-size: 1.5em;
+ cursor: pointer;
+ padding: 8px 12px;
+ border-radius: 50%;
+ box-shadow: 0 2px 4px rgba(0,0,0,0.3);
+ opacity: 0.8;
+ transition: opacity 0.2s, background-color 0.2s;
+ }
+ .carousel-btn:hover {
+ background-color: #ff52a2;
+ opacity: 1;
+ }
+ .carousel-btn.prev { left: 10px; }
+ .carousel-btn.next { right: 10px; }
+</style>
+</head>
+<body>
+
+<div id="notepadScreen" class="screen">
+<div class="notepad" id="page1">
+ <h3>📅 12 Diciembre 2025</h3>
+ <h4>💌 Para Naomi: </h4>
+ <p>Sinceramente me hubiera gustado hablar contigo sobre esto una ultima vez en persona pero por una u otra razón no se dió. </p>
+ <p>Bueno, primero que nada, queria dejar en claro que todo lo que hice: buscarte, darte tus flores favoritas, querer hablar contigo aunque fueran unos minutos, no fue por capricho. De verdad me llegaste a importar y sí quería algo contigo. No sé si fue por la conexión que sentí, por tu iniciativa o tu forma de ser, pero en muchos años no me había nacido hacer algo así por alguien.</p>
+ <p>Decidí cerrar este capítulo no por falta de interés, sino por todo lo contrario. Me esforcé porque realmente quería algo, pero ya entendí que no iba a pasar. Y preferí despedirme bien, sin dejar malentendidos.</p>
+<p>Tal vez hablamos en un mal momento, o simplemente la chispa se perdió. Aun así, me hubiera encantado conocerte más: tus miedos, tus metas, tus gustos. Quizá algún día podamos llevarnos bien en el trabajo y ser amigos, si se da.</p>
+<p>Por último, nada de lo que sentí o demostré fue mentira. De verdad creo que mereces algo bonito con la persona correcta.</p>
+<p>Te deseo lo mejor en tus estudios, en tu familia y en tu vida.</p>
+   <p>Gracias por lo que me hiciste sentir y por recordarme una parte de mí que tenía olvidada.</p>
+ 
+</div>
+<div class="notepad" id="page2" style="display:none; text-align:center;">
+ <img src="https://n9.cl/uw1f1q" alt="Foto especial" style="width:90%; max-width:350px; border-radius:15px; margin-bottom:15px;">
+ <p style="text-align:justify;">
+ Desde que llegaste a mi vida, todo cambió para bien; encontré en ti la paz que siempre busqué y la alegría que creí perdida. Me haces sentir completo(a), amado(a) y capaz de todo. Cada mirada tuya me recuerda por qué vale la pena cada día, y cada palabra tuya me da fuerzas para seguir. No necesito prometerte el mundo, solo quiero darte mi amor sincero, mi apoyo incondicional y mi deseo de compartir contigo cada instante de esta vida.
+ </p>
+ <div class="btn-container">
+ <button class="btn" onclick="prevPage(1)">⬅ Anterior</button>
+   <button class="btn" onclick="window.location.reload()">⬆ Inicio</button>
+ </div>
+</div>
+<div class="notepad" id="page3" style="display:none; text-align:center;">
+<h4>📸 Nuestros recuerdos</h4>
+<div class="carousel">
+ <div class="carousel-track" id="carouselTrack">
+ <img src="https://n9.cl/o11vrd" alt="Recuerdo 1">
+ <img src="https://n9.cl/bf87g" alt="Recuerdo 2">
+ <img src="https://n9.cl/ntjycw" alt="Recuerdo 3">
+ <img src="https://n9.cl/ce2j0" alt="Recuerdo 4">
+ </div>
+ <button class="carousel-btn prev" onclick="moveSlide(-1)">&#10094;</button>
+ <button class="carousel-btn next" onclick="moveSlide(1)">&#10095;</button>
+</div>
+<div class="btn-container">
+ <button class="btn" onclick="prevPage(2)">⬅ Anterior</button>
+  <button class="btn" onclick="window.location.reload()">⬆ Inicio</button>
+</div>
+</div>
+</div>
+<script>
+let currentSlide = 0;
+function moveSlide(direction) {
+const track = document.getElementById('carouselTrack');
+const slides = track.children.length;
+currentSlide += direction;
+if (currentSlide < 0) currentSlide = slides - 1;
+if (currentSlide >= slides) currentSlide = 0;
+track.style.transform = `translateX(-${currentSlide * 100}%)`;
+}
+
+// Funciones de control de páginas (simplificadas ya que no hay pantalla de inicio/contraseña)
+function showPage(n) {
+const pages = document.querySelectorAll('.notepad');
+pages.forEach(p => p.style.display = 'none');
+document.getElementById('page' + n).style.display = 'block';
+}
+function nextPage(n) {
+showPage(n);
+}
+function prevPage(n) {
+showPage(n);
+}
+
+// Asegurarse de que la primera página de la carta se muestre al cargar
+window.onload = () => showPage(1);
+</script>
+</body>
+</html>
