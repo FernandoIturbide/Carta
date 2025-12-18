@@ -1,292 +1,97 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Carta</title>
-<link rel="icon" type="image/png" href="icono.png">
-<link href="https://fonts.googleapis.com/css2?family=Dancing+Script&family=Poppins:wght@400;600&display=swap" rel="stylesheet">
-<style>
+    <meta charset="UTF-8">
+    <title>Sitio en Mantenimiento</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-/* --- ESTILOS BASE Y PANTALLAS INICIALES --- */
-body {
-font-family: "Poppins", sans-serif;
-background-color: #fff; /* Fondo blanco por defecto */
-display: flex;
-flex-direction: column;
-align-items: center;
-/* CAMBIO 1: Eliminar height: 100vh; */
-/* CAMBIO 2: Añadir overflow-y: auto; para permitir el scroll en caso de contenido largo */
-overflow-y: auto;
-margin: 0;
-text-align: center;
-color: #333;
-transition: background-color 0.5s ease;
-}
+    <!-- Fuente -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
 
-/* Clase para el fondo degradado, se añade/elimina con JS */
-.degraded-bg {
-background-color: #e0b0ff; /* Fallback color */
-background-image: linear-gradient(135deg, #a080c0 0%, #ffc0d8 100%); 
-}
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
 
-h2 {
-margin-bottom: 20px;
-}
-.screen {
-display: none;
-animation: fadeIn 0.8s ease;
-width: 90%;
-max-width: 600px;
-}
-.active {
-display: flex; 
-flex-direction: column;
-align-items: center;
-justify-content: center;
-/* Ajuste: Aplicar altura mínima a las pantallas activas, pero dejar que crezca si el contenido es largo */
-min-height: 100vh;
-}
+        body {
+            min-height: 100vh;
+            background: linear-gradient(270deg, #6a11cb, #2575fc, #00c6ff);
+            background-size: 600% 600%;
+            animation: gradientMove 10s ease infinite;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: #fff;
+            text-align: center;
+        }
 
-/* Sobreescribir altura mínima para la pantalla de la carta, permitiendo scroll sin forzar centrado vertical rígido */
-#screen3.active {
- min-height: auto; /* Permitir que la altura se ajuste al contenido */
- height: auto;
- justify-content: flex-start; /* Alinear el contenido al inicio si hay scroll */
-}
- 
-.main-img {
-width: 280px;
-height: auto;
-margin-bottom: 15px;
-cursor: pointer;
-transition: transform 0.3s ease;
-border: none;
-box-shadow: none;
-}
-.main-img:hover {
-transform: scale(1.05);
-}
-@keyframes fadeIn {
-from {opacity: 0; transform: scale(0.95);}
-to {opacity: 1; transform: scale(1);}
-}
+        @keyframes gradientMove {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
 
-/* --- ESTILOS DE LA CARTA (PANTALLA 3 en adelante) --- */
+        .card {
+            background: rgba(255, 255, 255, 0.15);
+            backdrop-filter: blur(12px);
+            padding: 50px 40px;
+            border-radius: 20px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.3);
+            max-width: 450px;
+            width: 90%;
+        }
 
-.screen#screen3 {
- width: 100%;
- max-width: none;
- padding: 20px 0;
-}
+        h1 {
+            font-size: 2.5rem;
+            margin-bottom: 15px;
+            font-weight: 700;
+        }
 
-.notepad {
-background-color: #ffffff;
-border: 1px solid #e0e0e0; 
-padding: 30px; 
-border-radius: 20px; 
-width: 90%;
-max-width: 500px;
-text-align: left;
-/* Nota: Se recomienda usar una fuente más legible que 'Comic Sans MS' para textos largos */
-font-family: 'Comic Sans MS', sans-serif; 
-font-size: 1.2em;
-line-height: 1.6;
-box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
-position: relative;
-margin-bottom: 20px;
-transition: box-shadow 0.3s ease;
-}
-.notepad:hover {
-box-shadow: 0 15px 40px rgba(0, 0, 0, 0.15);
-}
-.notepad h3 {
-margin-top: 0;
-color: #333333;
-font-family: 'Poppins', sans-serif;
-}
-.notepad h4 {
-color: #e91e63;
-font-family: 'Poppins', sans-serif;
-font-weight: 600;
-}
-.btn-container {
-display: flex;
-justify-content: space-between;
-margin-top: 25px; 
-}
-.btn {
-background-color: #ffffff;
-border: 1px solid #ff79c6; 
-color: #e91e63; 
-padding: 10px 20px;
-font-size: 16px;
-border-radius: 25px; 
-cursor: pointer;
-box-shadow: 0 4px 6px rgba(0,0,0,0.1);
-transition: all 0.3s ease;
-font-weight: bold;
-font-family: 'Poppins', sans-serif;
-}
-.btn:hover {
-background-color: #ff79c6; 
-color: white;
-transform: translateY(-3px);
-box-shadow: 0 6px 10px rgba(0,0,0,0.2);
-}
-/* Estilos del carrusel */
-.carousel {
-position: relative;
-width: 90%;
-max-width: 500px;
-margin: 20px auto;
-overflow: hidden;
-border-radius: 15px;
-box-shadow: 0 5px 15px rgba(0,0,0,0.2);
-}
-.carousel-track {
-display: flex;
-transition: transform 0.6s ease-in-out;
-width: 100%;
-}
-.carousel-track img {
-width: 100%;
-border-radius: 15px;
-flex-shrink: 0;
-object-fit: cover;
-}
-.carousel-btn {
-position: absolute;
-top: 50%;
-transform: translateY(-50%);
-background-color: #ff79c6;
-color: white;
-border: none;
-font-size: 1.5em;
-cursor: pointer;
-padding: 8px 12px;
-border-radius: 50%;
-box-shadow: 0 2px 4px rgba(0,0,0,0.3);
-opacity: 0.8;
-transition: opacity 0.2s, background-color 0.2s;
-}
-.carousel-btn:hover {
-background-color: #ff52a2;
-opacity: 1;
-}
-.carousel-btn.prev { left: 10px; }
-.carousel-btn.next { right: 10px; }
+        p {
+            font-size: 1.1rem;
+            opacity: 0.9;
+            margin-bottom: 30px;
+        }
 
-</style>
+        .loader {
+            width: 60px;
+            height: 60px;
+            border: 5px solid rgba(255,255,255,0.3);
+            border-top: 5px solid #fff;
+            border-radius: 50%;
+            margin: 0 auto;
+            animation: spin 1s linear infinite;
+        }
+
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+
+        footer {
+            margin-top: 25px;
+            font-size: 0.85rem;
+            opacity: 0.8;
+        }
+    </style>
 </head>
 <body>
 
- <div class="screen active" id="screen1">
-<h2>¡Ábrelo!</h2>
-<img src="Gemini_Generated_Image_qhubhxqhubhxqhub.png" alt="Sobre" class="main-img" onclick="nextScreen(2)">
-</div>
+    <div class="card">
+        <h1>🚧 Sitio en mantenimiento</h1>
+        <p>
+            Estamos trabajando para mejorar tu experiencia.  
+            Volvemos muy pronto ✨
+        </p>
 
- <div class="screen" id="screen2">
-<h2>¿Qué dirá?</h2>
-<img src="Gemini_Generated_Image_laor9alaor9alaor.png" alt="Carta lista" class="main-img" onclick="nextScreen(3, 1)"> 
-</div>
+        <div class="loader"></div>
 
- <div class="screen" id="screen3">
- <div class="notepad" id="page1">
- <h3>📅 12 Diciembre 2025</h3>
- <h4>💌 Para Naomi: </h4>
- <p>Sinceramente me hubiera gustado hablar contigo sobre esto una ultima vez en persona pero por una u otra razón no se dió.</p>
- <p>Bueno, primero que nada, queria dejar en claro que todo lo que hice: buscarte, darte tus flores favoritas, querer hablar contigo aunque fueran unos minutos, no fue por capricho. De verdad me llegaste a importar y sí quería algo contigo. No sé si fue por la conexión que sentí, por tu iniciativa o tu forma de ser, pero en muchos años no me había nacido hacer algo así por alguien.</p>
- <p>Decidí cerrar este capítulo no por falta de interés, sino por todo lo contrario. Me esforcé porque realmente quería algo, pero ya entendí que no iba a pasar. Y preferí despedirme bien, sin dejar malentendidos.</p>
- <p>Tal vez hablamos en un mal momento, o simplemente la chispa se perdió. Aun así, me hubiera encantado conocerte más: tus miedos, tus metas, tus gustos. Quizá algún día podamos llevarnos bien en el trabajo y ser amigos, si se da.</p>
- <p>Por último, nada de lo que sentí o demostré fue mentira. De verdad creo que mereces algo bonito con la persona correcta.</p>
- <p>Te deseo lo mejor en tus estudios, en tu familia y en tu vida.</p>
- <p>Gracias por lo que me hiciste sentir y por recordarme una parte de mí que tenía olvidada.</p>
- <div class="btn-container">
-  <button class="btn" onclick="nextScreen(1)">⬅ Regresar</button>
-  <button class="btn" onclick="window.location.href='https://fernandoiturbide.github.io/Flores/'">➡ Flores</button>
- </div>
- </div>
- <div class="notepad" id="page2" style="display:none; text-align:center;">
- <img src="https://n9.cl/uw1f1q" alt="Foto especial" style="width:90%; max-width:350px; border-radius:15px; margin-bottom:15px;">
- <p style="text-align:justify;">
- Desde que llegaste a mi vida, todo cambió para bien; encontré en ti la paz que siempre busqué y la alegría que creí perdida. Me haces sentir completo(a), amado(a) y capaz de todo. Cada mirada tuya me recuerda por qué vale la pena cada día, y cada palabra tuya me da fuerzas para seguir. No necesito prometerte el mundo, solo quiero darte mi amor sincero, mi apoyo incondicional y mi deseo de compartir contigo cada instante de esta vida.
- </p>
- <div class="btn-container">
-  <button class="btn" onclick="showPage(1)">⬅ Anterior</button>
-  <button class="btn" onclick="showPage(3)">➡ Siguiente</button>
- </div>
- </div>
- <div class="notepad" id="page3" style="display:none; text-align:center;">
- <h4>📸 Nuestros recuerdos</h4>
- <div class="carousel">
-  <div class="carousel-track" id="carouselTrack">
-  <img src="https://n9.cl/o11vrd" alt="Recuerdo 1">
-  <img src="https://n9.cl/bf87g" alt="Recuerdo 2">
-  <img src="https://n9.cl/ntjycw" alt="Recuerdo 3">
-  <img src="https://n9.cl/ce2j0" alt="Recuerdo 4">
-  </div>
-  <button class="carousel-btn prev" onclick="moveSlide(-1)">&#10094;</button>
-  <button class="carousel-btn next" onclick="moveSlide(1)">&#10095;</button>
- </div>
- <div class="btn-container">
-  <button class="btn" onclick="showPage(2)">⬅ Anterior</button>
-  <button class="btn" onclick="nextScreen(1)">⬆ Inicio</button>
- </div>
- </div>
-</div>
-<script>
- // Variables para el carrusel
- let currentSlide = 0;
- function moveSlide(direction) {
- const track = document.getElementById('carouselTrack');
- const slides = track.children.length;
- currentSlide += direction;
- if (currentSlide < 0) currentSlide = slides - 1;
- if (currentSlide >= slides) currentSlide = 0;
- track.style.transform = `translateX(-${currentSlide * 100}%)`;
- }
- 
- // Función principal para cambiar de pantalla
- function nextScreen(num) {
- const current = document.querySelector(".screen.active");
- const body = document.body;
- 
- // Ocultar la pantalla actual
- if (current) current.classList.remove("active");
- 
- // Mostrar la siguiente pantalla
- document.getElementById("screen" + num).classList.add("active");
- 
- // Lógica para cambiar el fondo del body
- if (num === 3) {
-  // Si vamos a la pantalla de la carta (screen3), añadir el fondo degradado
-  body.classList.add("degraded-bg");
- } else {
-  // Si vamos a cualquier otra pantalla (1 o 2), asegurar que el fondo sea blanco
-  body.classList.remove("degraded-bg");
-  currentSlide = 0; // Reiniciar el carrusel si volvemos al inicio
- }
- // Mostrar la primera página de la carta (page1) al entrar a screen3
- if (num === 3) showPage(1);
- }
- 
- // Función para cambiar las páginas dentro de la carta (screen3)
- function showPage(n) {
- const pages = document.querySelectorAll('#screen3 .notepad');
- pages.forEach(p => p.style.display = 'none');
- 
- // Mostrar la página específica
- const pageToShow = document.getElementById('page' + n);
- if (pageToShow) pageToShow.style.display = 'block';
- 
- // Si estamos en la página del carrusel, asegurarnos de que el carrusel esté en el slide 0
- if (n === 3) {
-  currentSlide = 0;
-  const track = document.getElementById('carouselTrack');
-  track.style.transform = `translateX(0%)`;
- }
- }
-</script>
+        <footer>
+            Gracias por tu paciencia
+        </footer>
+    </div>
+
 </body>
 </html>
