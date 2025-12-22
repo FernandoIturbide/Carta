@@ -126,7 +126,7 @@ font-size: 1.2em;
 line-height: 1.6;
 box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
 position: relative;
-margin-bottom: 50px;
+margin-bottom: 20px;
 transition: box-shadow 0.3s ease;
 box-shadow:
     0 0 15px rgba(207, 174, 112, 0.6),
@@ -245,26 +245,6 @@ opacity: 1;
   opacity: 0.8;
   transition: opacity 0.4s ease;
 }
-#wishStatus {
-  animation: fadeIn 0.6s ease;
-}
-.letter-actions {
-  display: flex;
-  gap: 16px;
-  margin-top: 25px;
-  width: 100%;
-}
-
-.letter-actions .btn {
-  flex: 1;
-  text-align: center;
-}
-@media (max-width: 500px) {
-  .letter-actions {
-    flex-direction: column;
-  }
-}
-
 
 </style>
 </head>
@@ -282,8 +262,8 @@ opacity: 1;
 </div>
 
  <div class="screen" id="screen3">
- <div class="notepad archived-letter" id="letter-2025-06" style="display:none;">
- <h3>📅 12 de Diciembre de 2025</h3>
+ <div class="notepad" id="page1">
+ <h3>📅 12 Diciembre 2025</h3>
  <h4>💌 Para Naomi: </h4>
  <p>Sinceramente me hubiera gustado hablar contigo sobre esto una ultima vez en persona pero por una u otra razón no se dió.</p>
  <p>Bueno, primero que nada, queria dejar en claro que todo lo que hice: buscarte, darte tus flores favoritas, querer hablar contigo aunque fueran unos minutos, no fue por capricho. De verdad me llegaste a importar y sí quería algo contigo. No sé si fue por la conexión que sentí, por tu iniciativa o tu forma de ser, pero en muchos años no me había nacido hacer algo así por alguien.</p>
@@ -293,10 +273,8 @@ opacity: 1;
  <p>Te deseo lo mejor en tus estudios, en tu familia y en tu vida.</p>
  <p>Gracias por lo que me hiciste sentir y por recordarme una parte de mí que tenía olvidada.</p>
  <div class="btn-container">
-  <button class="btn" onclick="nextScreen(1)">🏠 inicio</button>
-  <button class="btn" onclick="window.location.href='https://fernandoiturbide.github.io/Flores/'">Flores</button>
-  <button class="btn" onclick="showPage(3)">➡ Siguiente</button>
-  
+  <button class="btn" onclick="nextScreen(1)">⬅ Regresar</button>
+  <button class="btn" onclick="window.location.href='https://fernandoiturbide.github.io/Flores/'">➡ Flores</button>
  </div>
  </div>
  <div class="notepad" id="page2" style="display:none; text-align:center;">
@@ -309,65 +287,7 @@ opacity: 1;
   <button class="btn" onclick="showPage(3)">➡ Siguiente</button>
  </div>
  </div>
-
-<div class="notepad"  id="page3" style="display:none; text-align:center;">
-  <h4 id="wishTitle">🎄 Pide un deseo</h4>
-
-  <form id="wishForm">
-    <textarea 
-        name="deseo"
-        placeholder="Escribe aquí tu deseo..."
-        required
-        style="width:100%; min-height:120px; padding:10px; border-radius:10px; border:1px solid #ccc; font-family:Poppins;"
-    ></textarea>
-
-    <button class="btn" type="button" onclick="nextScreen(3)">
-        ⬅ Regresar
-    </button>
-
-    <button class="btn" type="submit" style="margin-top:15px;">
-        ✨ Enviar
-    </button>
-        
-
-    <p id="wishStatus" style="display:none; margin-top:15px; color:#0b6b3a; font-weight:600;">
-        🎄 Deseo enviado ✨
-    </p>
-    <button 
-        id="wishBackBtn" 
-        class="btn" 
-        style="display:none; margin-top:20px;"
-        onclick="nextScreen(3)"
-        >
-        ⬅ Regresar
-    </button>
-    <button 
-        id="wishBackBtn1" 
-        class="btn" 
-        style="display:none; margin-top:20px;"
-        onclick="window.location.href='https://fernandoiturbide.github.io/Flores/'"
-        >
-        Flores
-    </button>
-    </form>
-
-</div>
-
- <div class="notepad active-letter" id="letter-2025-12">
-  <h3>🎄 22 de diciembre de 2025</h3>
-<p>Acabo de actualizar la página. No sé, sentía que se desperdiciaba dejarla así en el abandono, entonces la actualizaré de vez en cuando con nuevas cosas y sorpresas, para sacarte al menos una sonrisa.</p>
-<p>Ahora que es Navidad, hice un apartado para que puedas pedir un deseo 🎁🎀🎄</p>
-<p>Lamentablemente ya no te deseé feliz Navidad en persona, pero ojalá te la pases muy bien.</p>
-
-  <div class="letter-actions">
-  <button class="btn" onclick="nextScreen(1)">🏠 inicio</button>
-  <button class="btn" onclick="showArchive()">📂 Cartas</button>
-  <button class="btn" onclick="showPage(3)">Deseo ✨</button>
-</div>
-
-</div>
-
- <div class="notepad">
+ <div class="notepad" id="page3" style="display:none; text-align:center;">
  <h4>📸 Nuestros recuerdos</h4>
  <div class="carousel">
   <div class="carousel-track" id="carouselTrack">
@@ -421,7 +341,7 @@ opacity: 1;
   currentSlide = 0; // Reiniciar el carrusel si volvemos al inicio
  }
  // Mostrar la primera página de la carta (page1) al entrar a screen3
- if (num === 3) showActiveLetter();
+ if (num === 3) showPage(1);
  }
  
  // Función para cambiar las páginas dentro de la carta (screen3)
@@ -440,19 +360,6 @@ opacity: 1;
   track.style.transform = `translateX(0%)`;
  }
  }
- function showArchive() {
-  const archived = document.querySelectorAll('.archived-letter');
-  archived.forEach(l => l.style.display = 'block');
-}
-
- function showActiveLetter() {
-  const letters = document.querySelectorAll('#screen3 .notepad');
-  letters.forEach(l => l.style.display = 'none');
-
-  const active = document.querySelector('.active-letter');
-  if (active) active.style.display = 'block';
-}
-
 // Fecha automática de actualización
 (function () {
   const dateElement = document.getElementById("updateDate");
@@ -468,44 +375,7 @@ opacity: 1;
   dateElement.textContent = `Ultima actualización: ${formattedDate}`;
 })();
 
-// Envío del deseo sin recargar (Formspree AJAX)
-const wishForm = document.getElementById("wishForm");
-
-if (wishForm) {
-  wishForm.addEventListener("submit", function (e) {
-    e.preventDefault();
-
-    const formData = new FormData(wishForm);
-
-    fetch("https://formspree.io/f/mbdrapjy", {
-      method: "POST",
-      body: formData,
-      headers: {
-        "Accept": "application/json"
-      }
-    })
-    .then(response => {
-      if (response.ok) {
-        wishForm.querySelector("textarea").style.display = "none";
-        wishForm.querySelectorAll("button").forEach(btn => {
-            btn.style.display = "none";
-            });
-        const title = document.getElementById("wishTitle");
-        if (title) title.style.display = "none";
-        const status = document.getElementById("wishStatus");
-        status.style.display = "block";
-        const backBtn = document.getElementById("wishBackBtn");
-        if (backBtn) backBtn.style.display = "inline-block";
-        const backBtn1 = document.getElementById("wishBackBtn1");
-        if (backBtn1) backBtn1.style.display = "inline-block";
-      }
-    })
-    .catch(() => {
-      alert("Ocurrió un error, intenta más tarde ❄️");
-    });
-  });
-}
-
+ 
 </script>
 </body>
 </html>
