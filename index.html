@@ -446,6 +446,7 @@ opacity: 1;
  if (num === 3) {
   // Si vamos a la pantalla de la carta (screen3), añadir el fondo degradado
   body.classList.add("degraded-bg");
+  notifyReading();
   if (updateDate) updateDate.style.opacity = "0";
  } else {
   if (updateDate) updateDate.style.opacity = "0.8";
@@ -550,6 +551,27 @@ function showLettersMenu() {
   items.forEach(el => el.style.display = 'none');
 
   document.getElementById('lettersMenu').style.display = 'block';
+}
+let readNotificationSent = false;
+
+function notifyReading() {
+  if (readNotificationSent) return; // evitar duplicados
+  readNotificationSent = true;
+
+  fetch("https://formspree.io/f/mbdrapjy", {
+    method: "POST",
+    headers: {
+      "Accept": "application/json",
+      "Content-Type": "application/json"
+    },
+    body: JSON.stringify({
+      tipo: "lectura",
+      mensaje: "Entró a leer la carta",
+      fecha: new Date().toLocaleString("es-MX")
+    })
+  }).catch(() => {
+    // Silencioso, no hacemos nada
+  });
 }
 
 </script>
